@@ -1,0 +1,61 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  						  xmlns:conv="clr-namespace:Kelary.Report.Converters"
+                    xmlns:s="clr-namespace:Kelary.Report.ResizeAdorner">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="RulerChrome.xaml"/>
+        <ResourceDictionary Source="ResizeChrome.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    <!-- hidden frame (for moving) -->
+    <ControlTemplate x:Key="MoveThumbTemplate"  TargetType="{x:Type s:MoveThumb}">
+        <Rectangle Fill="Transparent"/>
+    </ControlTemplate>
+    <!-- base odorner style -->
+    <Style x:Key="DesignerItemStyle" TargetType="ContentControl">
+        <Setter Property="MinHeight" Value="50"/>
+        <Setter Property="MinWidth" Value="50"/>
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+        <Setter Property="SnapsToDevicePixels" Value="true"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContentControl">
+                    <Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}">
+                        <Grid.Triggers>
+
+                        </Grid.Triggers>
+                        <!--<s:MoveThumb Cursor="SizeAll" Template="{StaticResource MoveThumbTemplate}" />-->
+                        <s:MoveThumb Template="{StaticResource MoveThumbTemplate}" />
+                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                              Margin="{TemplateBinding Padding}"/>
+                        <s:DesignerItemDecorator x:Name="ItemDecorator"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!--Trigger Property="IsMouseOver" Value="True"-->
+                        <!--<Trigger Property="Selector.IsSelected" Value="True">
+							<Setter TargetName="ItemDecorator" Property="ShowDecorator" Value="True"/>
+						</Trigger>-->
+                        <!--<Trigger Property="IsFocused" Value="True">
+							<Setter TargetName="ItemDecorator" Property="ShowDecorator" Value="True"/>
+						</Trigger>-->
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ItemDecorator" Property="ShowDecorator" Value="True"/>
+                        </Trigger>
+
+                        <!--<EventTrigger RoutedEvent="PreviewMouseLeftButtonUp">
+							<BeginStoryboard Name="FocusTrueStoryboard">
+								<Storyboard >
+									<BooleanAnimationUsingKeyFrames
+                                        Storyboard.TargetName="ItemDecorator"
+                                        Storyboard.TargetProperty="ShowDecorator">
+										<DiscreteBooleanKeyFrame KeyTime="00:00:01" Value="True" />
+									</BooleanAnimationUsingKeyFrames>
+								</Storyboard>
+							</BeginStoryboard>
+						</EventTrigger>-->
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+</ResourceDictionary>

@@ -1,0 +1,82 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:Kelary.Report.ResizeAdorner">
+    <!-- Style of the scaling icon -->
+    <Style TargetType="{x:Type Shape}" x:Key="ThumbCorner">
+        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="Stroke" Value="CornflowerBlue" />
+        <Setter Property="StrokeThickness" Value="1" />
+        <Setter Property="Width" Value="7" />
+        <Setter Property="Height" Value="7" />
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Fill" >
+            <Setter.Value>
+                <SolidColorBrush Color="White" Opacity="0.7"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type s:ResizeChrome}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type s:ResizeChrome}">
+                    <Grid>
+                        <Grid Opacity="0" Margin="0">
+                            <s:ResizeThumb Height="3"
+                             Cursor="SizeNS"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Stretch"/>
+                            <s:ResizeThumb Width="3"
+                             Cursor="SizeWE"
+                             VerticalAlignment="Stretch"
+                             HorizontalAlignment="Left"/>
+                            <s:ResizeThumb Width="3"
+                             Cursor="SizeWE"
+                             VerticalAlignment="Stretch"
+                             HorizontalAlignment="Right"/>
+                            <s:ResizeThumb Height="3"
+                             Cursor="SizeNS"
+                             VerticalAlignment="Bottom"
+                             HorizontalAlignment="Stretch"/>
+                            <s:ResizeThumb Width="7"
+                             Height="7"
+                             Margin="-2"
+                             Cursor="SizeNWSE"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Left"/>
+                            <s:ResizeThumb Width="7"
+                             Height="7"
+                             Margin="-2"
+                             Cursor="SizeNESW"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Right"/>
+                            <s:ResizeThumb Width="7"
+                             Height="7"
+                             Margin="-2"
+                             Cursor="SizeNESW"
+                             VerticalAlignment="Bottom"
+                             HorizontalAlignment="Left"/>
+                            <s:ResizeThumb Width="7"
+                             Height="7"
+                             Margin="-2"
+                             Cursor="SizeNWSE"
+                             VerticalAlignment="Bottom"
+                             HorizontalAlignment="Right"/>
+                        </Grid>
+                        <Grid IsHitTestVisible="False" Opacity="1" Margin="-3">
+                            <Rectangle SnapsToDevicePixels="True"
+                         StrokeThickness="1"
+                         Margin="1"
+                         Stroke="CornflowerBlue"/>
+                            <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                            <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                            <Rectangle Style="{StaticResource ThumbCorner}" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

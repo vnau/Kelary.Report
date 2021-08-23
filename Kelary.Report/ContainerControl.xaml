@@ -1,0 +1,33 @@
+﻿<!-- 
+	Container for embedded document user controls.
+-->
+<UserControl x:Class="Kelary.Report.ContainerControl"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:ra="clr-namespace:Kelary.Report.ResizeAdorner"
+	Focusable="True"
+	Width="{Binding Width,Mode=TwoWay}" Height="{Binding Height,Mode=TwoWay}"
+	MinWidth="200" MinHeight="200">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResizeAdorner/Resources/DesignerItem.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <!--<Border Name="Border" BorderThickness="0.3" BorderBrush="Black">-->
+    <Grid>
+        <ContentControl Content="{Binding Mode=OneWay}" FocusManager.IsFocusScope="True" />
+        <!-- Make top layer invisible when ContainerControl get focused. -->
+        <Rectangle Fill="Transparent" IsHitTestVisible="True"
+				PreviewMouseLeftButtonDown="Surface_PreviewMouseLeftButtonDown"
+				Visibility="{Binding 
+					RelativeSource={
+						RelativeSource AncestorType={x:Type UserControl}, 
+						Mode=FindAncestor
+					}, 
+					Path=IsFocused, 
+					Converter={StaticResource BooleanToVisibilityConverter},ConverterParameter=True}" />
+    </Grid>
+    <!--</Border>-->
+</UserControl>
